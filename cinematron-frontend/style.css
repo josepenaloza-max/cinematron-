@@ -334,9 +334,6 @@ footer .wrap {
     }
   }
 }
-/* =====================================
-   INICIO DE SESIÓN - ADMINISTRADOR
-===================================== */
 
 #vista-admin {
   max-width: 600px;
@@ -344,8 +341,6 @@ footer .wrap {
   margin: 70px auto;
   padding: 20px;
 }
-
-/* Formulario */
 
 #form-login {
   width: 100%;
@@ -355,8 +350,6 @@ footer .wrap {
   gap: 20px;
 }
 
-/* Título */
-
 #form-login h2 {
   font-family: "Archivo Black", sans-serif;
   font-size: clamp(25px, 5vw, 38px);
@@ -365,8 +358,6 @@ footer .wrap {
   text-transform: uppercase;
   margin-bottom: 10px;
 }
-
-/* Campos */
 
 .campo-login {
   display: flex;
@@ -395,8 +386,6 @@ footer .wrap {
   outline: 2px solid var(--pink);
 }
 
-/* Botón */
-
 #form-login .btn-primario {
   width: 100%;
   padding: 13px;
@@ -416,8 +405,6 @@ footer .wrap {
   background: var(--yellow);
 }
 
-/* Panel administrativo */
-
 #admin-panel {
   padding: 30px;
   margin-top: 25px;
@@ -427,8 +414,6 @@ footer .wrap {
   font-size: 30px;
   margin-bottom: 15px;
 }
-
-/* Adaptación para celulares */
 
 @media (max-width: 600px) {
   #vista-admin {
@@ -444,70 +429,265 @@ footer .wrap {
   display: none !important;
 }
 
-/* =====================================
-   ESTILOS PARA LAS TARJETAS DE PELÍCULAS
-   ===================================== */
 .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 26px;
-    margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 26px;
+  margin-top: 20px;
 }
 
 .film-card {
-    display: flex;
-    flex-direction: column;
-    padding: 0; /* Quitamos el padding por defecto del box */
-    overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  overflow: hidden;
 }
 
 .film-header {
-    height: 120px;
-    display: flex;
-    align-items: flex-end;
-    padding: 16px;
-    border-bottom: 3px solid var(--ink);
+  height: 120px;
+  display: flex;
+  align-items: flex-end;
+  padding: 16px;
+  border-bottom: 3px solid var(--ink);
 }
 
 .film-header h3 {
-    font-size: 28px;
-    color: var(--ink);
+  font-size: 28px;
+  color: var(--ink);
 }
 
 .film-body {
-    padding: 20px;
+  padding: 20px;
 }
 
 .film-body p {
-    margin: 0 0 15px 0;
+  margin: 0 0 15px 0;
 }
 
 .funciones-lista {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
 }
 
 .btn-funcion {
-    background: var(--white);
-    border: 3px solid var(--ink);
-    border-radius: 12px;
-    padding: 8px 12px;
-    cursor: pointer;
-    font: 700 16px 'Karla', sans-serif;
-    color: var(--ink);
-    text-align: left;
-    transition: background 0.2s;
+  background: var(--white);
+  border: 3px solid var(--ink);
+  border-radius: 12px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font:
+    700 16px "Karla",
+    sans-serif;
+  color: var(--ink);
+  text-align: left;
+  transition: background 0.2s;
 }
 
 .btn-funcion:hover {
-    background: var(--yellow);
+  background: var(--yellow);
 }
 
 .btn-funcion small {
-    display: block;
-    font-weight: 400;
-    font-size: 12px;
-    margin-top: 2px;
+  display: block;
+  font-weight: 400;
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+.pantalla-cine {
+  background: #ccc;
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 20px auto;
+  max-width: 400px;
+  font-weight: bold;
+  letter-spacing: 5px;
+}
+
+.sala-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 15px;
+  max-width: 450px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+.asiento {
+  width: 100%;
+  aspect-ratio: 1;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+  position: relative;
+}
+
+.asiento svg {
+  width: 80%;
+  height: 80%;
+  fill: var(--mint);
+  transition: fill 0.2s ease;
+}
+
+.asiento span {
+  display: block !important;
+  font-size: 10px;
+  font-weight: bold;
+  color: var(--ink);
+  position: absolute;
+  bottom: -5px;
+  background: white;
+  padding: 1px 4px;
+  border-radius: 4px;
+  border: 1px solid var(--ink);
+}
+
+.asiento.ocupado {
+  cursor: not-allowed;
+}
+.asiento.ocupado svg {
+  fill: #ff4d4d;
+  opacity: 0.6;
+}
+.asiento.ocupado span {
+  background: #ff4d4d;
+  color: white;
+}
+
+.asiento.seleccionado svg {
+  fill: var(--yellow);
+  filter: drop-shadow(0px 0px 8px rgba(255, 225, 77, 1));
+}
+.asiento.seleccionado span {
+  background: var(--yellow);
+  color: var(--ink);
+}
+
+.resumen-reserva {
+  margin-top: 30px;
+  text-align: center;
+  padding: 20px;
+}
+.resumen-reserva p {
+  margin: 10px 0;
+  font-size: 18px;
+}
+
+.form-box {
+  max-width: 500px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 30px;
+}
+
+.form-box label {
+  font-weight: 700;
+  font-size: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-box input {
+  padding: 12px;
+  border: 3px solid var(--ink);
+  border-radius: 10px;
+  background: var(--white);
+  font:
+    400 16px "Karla",
+    sans-serif;
+  color: var(--ink);
+}
+
+.form-box input:focus {
+  outline: 2px solid var(--pink);
+}
+
+.btn-volver {
+  background: transparent;
+  border: none;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--ink);
+  cursor: pointer;
+  margin-bottom: 20px;
+  display: inline-block;
+}
+.btn-volver:hover {
+  text-decoration: underline;
+}
+
+.comprobante {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 30px;
+  text-align: center;
+  font-family: "Courier New", monospace;
+  border: 3px solid var(--ink);
+  border-radius: 18px;
+  box-shadow: 6px 6px 0 var(--ink);
+  background: var(--white);
+}
+
+.comprobante h1 {
+  margin-bottom: 5px;
+  font-size: 32px;
+}
+.comprobante h3 {
+  margin-bottom: 20px;
+  color: #555;
+}
+
+.codigo {
+  font-size: 28px;
+  font-weight: bold;
+  color: #e74c3c;
+  letter-spacing: 3px;
+  margin: 20px 0;
+  border: 2px dashed #ccc;
+  padding: 15px;
+  background: #f9f9f9;
+}
+
+.comprobante p {
+  margin: 10px 0;
+  font-size: 16px;
+  text-align: left;
+  border-bottom: 1px dotted #ccc;
+  padding-bottom: 5px;
+}
+
+.no-print {
+  margin-top: 30px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+@media print {
+  .no-print,
+  nav,
+  footer,
+  .btn-volver {
+    display: none !important;
+  }
+  body {
+    background: white;
+  }
+  .comprobante {
+    box-shadow: none;
+    border: 1px solid #000;
+  }
 }

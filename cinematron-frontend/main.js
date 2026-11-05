@@ -3,18 +3,17 @@ let funcionActual = null;
 let asientosSeleccionados = [];
 let precioEntrada = 0;
 
-// --- 1. NAVEGACIÓN ENTRE PANTALLAS ---
+// navegación entre secciones
 function mostrarSeccion(id) {
   document.querySelectorAll("main").forEach((m) => (m.hidden = true));
   document.getElementById(`vista-${id}`).hidden = false;
   window.scrollTo(0, 0);
 }
 
-// --- 2. CARGAR CARTELERA DESDE EL BACKEND (MYSQL) ---
+// carga la cartelera
 async function cargarCartelera() {
   try {
-    // AQUÍ SE CONECTA A TU BASE DE DATOS A TRAVÉS DE NODE.JS
-    const response = await fetch(`${API_URL}/funciones`); 
+    const response = await fetch(`${API_URL}/funciones`);
     const data = await response.json();
 
     const grid = document.getElementById("grid-peliculas");
@@ -38,7 +37,7 @@ async function cargarCartelera() {
     for (const [nombrePelicula, funciones] of Object.entries(peliculas)) {
       const colores = ["#79C7FF", "#FF8FB8", "#FFE14D", "#9BF0C9"];
       const colorRandom = colores[Math.floor(Math.random() * colores.length)];
-      
+
       // Si tienes la sinopsis en la BD, la usa. Si no, pone una por defecto.
       const sinopsis = funciones[0].sinopsis || "Sin descripción disponible.";
 
@@ -48,9 +47,9 @@ async function cargarCartelera() {
             hour: "2-digit",
             minute: "2-digit",
           });
-          return `<button class="btn-funcion" onclick="seleccionarFuncion(${f.idFuncion}, '${nombrePelicula}', '${f.sala}', ${f.precio})">
-                    ${hora} <small>${f.sala} - ${f.tipo_sala}</small>
-                </button>`;
+          return `<button class="btn-funcion" onclick="seleccionarFuncion(${f.idFuncion}, '${nombrePelicula}', '${f.sala}', ${f.precio}, ${f.idSala})">
+            ${hora} <small>${f.sala} - ${f.tipo_sala}</small>
+        </button>`;
         })
         .join("");
 
@@ -76,29 +75,29 @@ async function cargarCartelera() {
   }
 }
 
-// --- 3. SELECCIONAR FUNCIÓN Y VER ASIENTOS ---
+// cargar funciones en el administrador
 async function seleccionarFuncion(id, pelicula, sala, precio) {
   funcionActual = { id, pelicula, sala };
   precioEntrada = precio;
   asientosSeleccionados = [];
   actualizarResumen();
 
-  document.getElementById("titulo-asientos").textContent = `${pelicula} - ${sala}`;
+  document.getElementById("titulo-asientos").textContent =
+    `${pelicula} - ${sala}`;
   mostrarSeccion("asientos");
 
   try {
-    // Extraemos el ID de la sala (ej. "Sala 1" -> 1)
-    const idSala = parseInt(sala.replace(/\D/g, '')) || 1; 
-    
-    // Traemos TODOS los asientos de la sala desde MySQL
+    const idSala = parseInt(sala.replace(/\D/g, "")) || 1;
+
     const resTodos = await fetch(`${API_URL}/asientos/sala/${idSala}`);
     const dataTodos = await resTodos.json();
 
-    // Traemos los asientos ocupados de esta función
-    const resOcupados = await fetch(`${API_URL}/asientos/funcion/${id}/ocupados`);
+    const resOcupados = await fetch(
+      `${API_URL}/asientos/funcion/${id}/ocupados`,
+    );
     const dataOcupados = await resOcupados.json();
-    
-    const idsOcupados = dataOcupados.data.map(a => a.idAsiento);
+
+    const idsOcupados = dataOcupados.data.map((a) => a.idAsiento);
 
     const grid = document.getElementById("grid-asientos");
     grid.innerHTML = "";
@@ -109,11 +108,11 @@ async function seleccionarFuncion(id, pelicula, sala, precio) {
       div.dataset.id = asiento.idAsiento;
 
       if (idsOcupados.includes(asiento.idAsiento)) {
-          div.classList.add("ocupado");
-          div.title = `Asiento ${asiento.fila}${asiento.columna} - Ocupado`;
+        div.classList.add("ocupado");
+        div.title = `Asiento ${asiento.fila}${asiento.columna} - Ocupado`;
       } else {
-          div.title = `Asiento ${asiento.fila}${asiento.columna} - Disponible`;
-          div.onclick = () => toggleAsiento(div, asiento);
+        div.title = `Asiento ${asiento.fila}${asiento.columna} - Disponible`;
+        div.onclick = () => toggleAsiento(div, asiento);
       }
 
       div.innerHTML = `
@@ -130,7 +129,7 @@ async function seleccionarFuncion(id, pelicula, sala, precio) {
   }
 }
 
-// --- 4. LÓGICA DE SELECCIÓN DE ASIENTOS ---
+// seleccionar y deseleccionar asientos
 function toggleAsiento(elemento, asiento) {
   const id = asiento.idAsiento;
   if (asientosSeleccionados.includes(id)) {
@@ -158,12 +157,13 @@ function actualizarResumen() {
     btn.disabled = true;
   } else {
     txtAsientos.textContent = `${asientosSeleccionados.length} asientos`;
-    txtTotal.textContent = "$" + (asientosSeleccionados.length * precioEntrada).toLocaleString();
+    txtTotal.textContent =
+      "$" + (asientosSeleccionados.length * precioEntrada).toLocaleString();
     btn.disabled = false;
   }
 }
 
-// --- 5. CONFIRMAR RESERVA (GUARDAR EN MYSQL) ---
+// confirmar reserva
 async function confirmarReserva(event) {
   event.preventDefault();
   const btn = event.target.querySelector("button");
@@ -194,9 +194,12 @@ async function confirmarReserva(event) {
       document.getElementById("ticket-cliente").textContent = d.cliente;
       document.getElementById("ticket-cedula").textContent = d.cedula;
       document.getElementById("ticket-pelicula").textContent = d.pelicula;
-      document.getElementById("ticket-funcion").textContent = new Date(d.fechaHora).toLocaleString();
+      document.getElementById("ticket-funcion").textContent = new Date(
+        d.fechaHora,
+      ).toLocaleString();
       document.getElementById("ticket-asientos").textContent = d.asientos;
-      document.getElementById("ticket-total").textContent = "$" + (asientosSeleccionados.length * precioEntrada).toLocaleString();
+      document.getElementById("ticket-total").textContent =
+        "$" + (asientosSeleccionados.length * precioEntrada).toLocaleString();
 
       mostrarSeccion("comprobante");
     } else {
@@ -212,13 +215,13 @@ async function confirmarReserva(event) {
   }
 }
 
-// --- 6. DESCARGAR PDF ---
+// descargar PDF
 function descargarPDF() {
   const elemento = document.getElementById("ticket");
   html2pdf().from(elemento).save("reserva-cinematron.pdf");
 }
 
-// --- INICIALIZACIÓN ---
+// inicialización
 document.addEventListener("DOMContentLoaded", () => {
   cargarCartelera();
   mostrarSeccion("cartelera");
