@@ -1,0 +1,318 @@
+:root {
+  --ink: #1e1236;
+  --pink: #ff8fb8;
+  --yellow: #ffe14d;
+  --blue: #79c7ff;
+  --mint: #9bf0c9;
+  --white: #fff;
+  --bg: #fff7fb;
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font:
+    400 17px/1.5 "Karla",
+    sans-serif;
+}
+h1,
+h2,
+h3 {
+  font-family: "Archivo Black", sans-serif;
+  font-weight: 400;
+  margin: 0;
+  line-height: 1;
+}
+.wrap {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+.box {
+  border: 3px solid var(--ink);
+  border-radius: 18px;
+  box-shadow: 6px 6px 0 var(--ink);
+  background: var(--white);
+  padding: 20px;
+}
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 0;
+}
+nav b {
+  background: var(--yellow);
+  border: 3px solid var(--ink);
+  padding: 4px 12px;
+  border-radius: 12px;
+  transform: rotate(-2deg);
+}
+nav a {
+  color: var(--ink);
+  font-weight: 700;
+  text-decoration: none;
+  margin-left: 20px;
+  cursor: pointer;
+}
+.hero {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 28px;
+  padding: 28px 0 44px;
+  align-items: center;
+}
+.hero h1 {
+  font-size: clamp(46px, 9vw, 112px);
+  text-transform: uppercase;
+}
+.hero h1 em {
+  font-style: normal;
+  background: var(--pink);
+  padding: 0 10px;
+  border: 3px solid var(--ink);
+  border-radius: 14px;
+  display: inline-block;
+  transform: rotate(-1.5deg);
+}
+h2.s {
+  font-size: clamp(28px, 4.4vw, 46px);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 26px;
+}
+.pill {
+  background: var(--white);
+  border: 3px solid var(--ink);
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-right: 8px;
+}
+.pill.active {
+  background: var(--ink);
+  color: var(--white);
+}
+
+/* Estilos para tarjetas de películas generadas por JS */
+.film-card {
+  display: flex;
+  flex-direction: column;
+}
+.film-header {
+  height: 120px;
+  display: flex;
+  align-items: flex-end;
+  padding: 16px;
+  border-bottom: 3px solid var(--ink);
+  border-radius: 15px 15px 0 0;
+}
+.film-header h3 {
+  font-size: 24px;
+}
+.film-body {
+  padding: 16px;
+}
+.funciones-lista {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+.btn-funcion {
+  background: var(--white);
+  border: 3px solid var(--ink);
+  border-radius: 12px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-weight: 700;
+  text-align: left;
+}
+.btn-funcion:hover {
+  background: var(--yellow);
+}
+.btn-funcion small {
+  display: block;
+  font-weight: 400;
+  font-size: 12px;
+}
+
+/* Pantalla de Asientos */
+.pantalla-cine {
+  background: #ccc;
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 20px auto;
+  max-width: 400px;
+  font-weight: bold;
+  letter-spacing: 5px;
+}
+.sala-grid {
+    display: grid;
+    gap: 15px; 
+    max-width: 400px; 
+    margin: 0 auto;
+    padding: 20px 0;
+}
+.asiento {
+    width: 100%;
+    aspect-ratio: 1;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+}
+
+/* Color por defecto (Disponible) */
+.asiento svg {
+    width: 85%;
+    height: 85%;
+    fill: var(--mint); /* Verde */
+    transition: fill 0.2s ease;
+}
+
+/* Ocupado */
+.asiento.ocupado {
+    cursor: not-allowed;
+}
+.asiento.ocupado svg {
+    fill: #ff4d4d; /* Rojo */
+    opacity: 0.5;
+}
+
+/* Seleccionado */
+.asiento.seleccionado {
+    transform: scale(1.15);
+}
+.asiento.seleccionado svg {
+    fill: var(--yellow); /* Amarillo */
+    filter: drop-shadow(0px 0px 5px rgba(255, 225, 77, 0.8));
+}
+
+/* Ocultar texto A1, B2 */
+.asiento span {
+    display: none;
+}
+.resumen-reserva {
+  margin-top: 30px;
+  text-align: center;
+}
+
+/* Formularios */
+.form-box {
+  max-width: 400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.form-box label {
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+}
+.form-box input {
+  padding: 10px;
+  border: 2px solid var(--ink);
+  border-radius: 8px;
+  font-size: 16px;
+}
+.btn-primario {
+  background: var(--ink);
+  color: var(--white);
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 16px;
+}
+.btn-primario:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.btn-secundario {
+  background: var(--yellow);
+  color: var(--ink);
+  padding: 12px 20px;
+  border: 2px solid var(--ink);
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.btn-volver {
+  background: none;
+  border: none;
+  font-weight: bold;
+  color: var(--ink);
+  cursor: pointer;
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+/* Comprobante */
+.comprobante {
+  max-width: 500px;
+  margin: 40px auto;
+  text-align: center;
+  font-family: "Courier New", monospace;
+}
+.comprobante h1 {
+  color: var(--ink);
+  margin-bottom: 5px;
+}
+.codigo {
+  font-size: 28px;
+  font-weight: bold;
+  color: #e74c3c;
+  letter-spacing: 3px;
+  margin: 20px 0;
+  border: 2px dashed #ccc;
+  padding: 10px;
+}
+.no-print {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+@media (max-width: 760px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+  nav a {
+    margin-left: 10px;
+    font-size: 14px;
+  }
+}
+@media print {
+  .no-print,
+  nav,
+  footer,
+  .btn-volver {
+    display: none !important;
+  }
+  body {
+    background: white;
+  }
+  .box {
+    box-shadow: none;
+    border: 1px solid #000;
+  }
+}
