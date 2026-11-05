@@ -443,3 +443,71 @@ footer .wrap {
 [hidden] {
   display: none !important;
 }
+
+/* =====================================
+   ESTILOS PARA LAS TARJETAS DE PELÍCULAS
+   ===================================== */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 26px;
+    margin-top: 20px;
+}
+
+.film-card {
+    display: flex;
+    flex-direction: column;
+    padding: 0; /* Quitamos el padding por defecto del box */
+    overflow: hidden;
+}
+
+.film-header {
+    height: 120px;
+    display: flex;
+    align-items: flex-end;
+    padding: 16px;
+    border-bottom: 3px solid var(--ink);
+}
+
+.film-header h3 {
+    font-size: 28px;
+    color: var(--ink);
+}
+
+.film-body {
+    padding: 20px;
+}
+
+.film-body p {
+    margin: 0 0 15px 0;
+}
+
+.funciones-lista {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.btn-funcion {
+    background: var(--white);
+    border: 3px solid var(--ink);
+    border-radius: 12px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font: 700 16px 'Karla', sans-serif;
+    color: var(--ink);
+    text-align: left;
+    transition: background 0.2s;
+}
+
+.btn-funcion:hover {
+    background: var(--yellow);
+}
+
+.btn-funcion small {
+    display: block;
+    font-weight: 400;
+    font-size: 12px;
+    margin-top: 2px;
+}
