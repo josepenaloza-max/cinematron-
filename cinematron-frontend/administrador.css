@@ -1,0 +1,158 @@
+/* =====================================
+   PANEL DE ADMINISTRADOR
+   (usa las variables de style.css)
+===================================== */
+
+[hidden] { display: none !important; }
+
+.adm { padding-bottom: 60px; }
+
+.adm-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 0;
+}
+
+.adm-top .logo {
+    font: 400 24px 'Archivo Black', sans-serif;
+    background: var(--yellow);
+    border: 3px solid var(--ink);
+    padding: 4px 12px;
+    border-radius: 12px;
+    transform: rotate(-2deg);
+}
+
+.adm-titulo {
+    font-size: clamp(30px, 6vw, 56px);
+    text-transform: uppercase;
+    margin: 10px 0 26px;
+}
+
+.adm-sec {
+    padding: 26px;
+    margin-bottom: 30px;
+}
+
+/* ---------- Formularios ---------- */
+
+.adm-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: flex-end;
+    margin: 18px 0 24px;
+}
+
+.adm-form .campo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1 1 180px;
+}
+
+.adm-form label { font-weight: 700; }
+
+.adm-form input,
+.adm-form select {
+    width: 100%;
+    padding: 11px;
+    border: 3px solid var(--ink);
+    border-radius: 10px;
+    background: var(--bg);
+    color: var(--ink);
+    font: 400 16px 'Karla', sans-serif;
+}
+
+.adm-form input:focus,
+.adm-form select:focus { outline: 2px solid var(--pink); }
+
+.btn-primario,
+.btn-sec,
+.btn-del {
+    border: 3px solid var(--ink);
+    border-radius: 12px;
+    font: 700 15px 'Karla', sans-serif;
+    color: var(--ink);
+    cursor: pointer;
+}
+
+.btn-primario {
+    background: var(--pink);
+    padding: 12px 20px;
+    box-shadow: 4px 4px 0 var(--ink);
+}
+.btn-primario:hover { background: var(--yellow); }
+
+.btn-sec {
+    background: var(--white);
+    padding: 8px 16px;
+}
+.btn-sec:hover { background: var(--mint); }
+
+.btn-del {
+    background: var(--pink);
+    padding: 5px 12px;
+}
+.btn-del:hover { background: #ff6b9a; }
+
+.btn-primario:focus-visible,
+.btn-sec:focus-visible,
+.btn-del:focus-visible { outline: 3px solid #E0245E; outline-offset: 2px; }
+
+/* ---------- Lista de películas ---------- */
+
+.adm-lista {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+}
+
+.adm-lista li {
+    border: 3px solid var(--ink);
+    border-radius: 14px;
+    padding: 14px;
+    background: var(--blue);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.adm-lista strong { display: block; font-size: 18px; }
+.adm-lista small { color: var(--ink); }
+
+/* ---------- Tablas ---------- */
+
+.tabla-scroll { overflow-x: auto; }
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 480px;
+}
+
+th, td {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 3px solid var(--ink);
+}
+
+th {
+    background: var(--yellow);
+    border-top: 3px solid var(--ink);
+    font-weight: 700;
+}
+
+td.vacio {
+    text-align: center;
+    color: #5A4A78;
+    padding: 24px;
+}
+
+@media (max-width: 600px) {
+    .adm-sec { padding: 18px; }
+}
