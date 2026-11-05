@@ -1,12 +1,11 @@
 const API_URL = "http://localhost:3000/api";
 const token = localStorage.getItem("token");
 
-// Si no hay token, lo sacamos de la página
 if (!token) {
     window.location.href = "login.html";
 }
 
-// Referencias al DOM
+
 const formPelicula = document.getElementById('form-pelicula');
 const listaPeliculas = document.getElementById('lista-peliculas');
 const formFuncion = document.getElementById('form-funcion');
@@ -22,7 +21,7 @@ function el(tag, texto, clase) {
     return e;
 }
 
-/* ================= PELÍCULAS ================= */
+// películas 
 
 async function cargarPeliculas() {
     try {
@@ -39,7 +38,6 @@ async function cargarPeliculas() {
         peliculas.forEach(p => {
             const li = document.createElement('li');
             const info = document.createElement('div');
-            // Como tu BD no tiene duración en la tabla pelicula (solo en funcion), mostramos género
             info.append(el('strong', p.titulo), el('small', `${p.genero || 'Sin género'}`));
 
             const btn = el('button', 'Eliminar', 'btn-del');
@@ -75,15 +73,17 @@ formPelicula.addEventListener('submit', async (e) => {
     e.preventDefault();
     const titulo = document.getElementById('p-titulo').value.trim();
     const genero = document.getElementById('p-genero').value.trim();
-    
-    // Nota: La BD pide 'anio' y 'duracion', pero el form no los tiene. Los enviamos genéricos.
-    const nuevaPelicula = {
+    const duracion = document.getElementById('p-duracion').value;
+    const sinopsis = document.getElementById('p-sinopsis').value.trim();
+
+    const duracionFormateada = `0${Math.floor(duracion/60)}:${duracion%60}:00`;
+        const nuevaPelicula = {
         titulo: titulo,
         genero: genero,
         autor: "Admin",
         anio: 2026,
-        duracion: "02:00:00",
-        sinopsis: "Sin descripción."
+        duracion: duracionFormateada,
+        sinopsis: sinopsis
     };
 
     try {
@@ -91,13 +91,13 @@ formPelicula.addEventListener('submit', async (e) => {
             method: 'POST',
             headers: { 
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}` // Enviamos el token del admin
+                'Authorization': `Bearer ${token}` 
             },
             body: JSON.stringify(nuevaPelicula)
         });
         if (res.ok) {
             formPelicula.reset();
-            cargarPeliculas(); // Recargar la lista
+            cargarPeliculas(); 
         } else {
             alert("Error al crear película");
         }
@@ -119,7 +119,7 @@ async function eliminarPelicula(id) {
     }
 }
 
-/* ================= FUNCIONES ================= */
+// funciones
 
 async function cargarFunciones() {
     try {
@@ -146,7 +146,6 @@ async function cargarFunciones() {
             btn.addEventListener('click', () => eliminarFuncion(f.idFuncion));
             tdBtn.append(btn);
 
-            // Formateamos la fecha
             const fechaObj = new Date(f.fechaHora);
             const fechaStr = fechaObj.toLocaleDateString();
             const horaStr = fechaObj.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
@@ -172,10 +171,8 @@ formFuncion.addEventListener('submit', async (e) => {
 
     if (!idPelicula || !fecha || !hora) return alert('Selecciona película, fecha y hora.');
 
-    // Unimos fecha y hora en el formato DATETIME de MySQL (YYYY-MM-DD HH:MM:SS)
     const fechaHora = `${fecha} ${hora}:00`;
     
-    // Asumimos Sala 1 para nuevas funciones para que no falle el backend
     const nuevaFuncion = {
         idPelicula: idPelicula,
         idSala: 1, 
@@ -217,7 +214,7 @@ async function eliminarFuncion(id) {
     }
 }
 
-/* ================= RESERVAS ================= */
+// reservas
 
 async function cargarReservas() {
     try {
@@ -242,8 +239,8 @@ async function cargarReservas() {
             const tr = document.createElement('tr');
             tr.append(
                 el('td', r.codigo),
-                el('td', 'Ver detalle'), // Por ahora no traemos el nombre de la peli en el findAll de reservas
-                el('td', 'Asientos'), // Lo mismo
+                el('td', 'Ver detalle'),
+                el('td', 'Asientos'),
                 el('td', r.telefono)
             );
             tbodyReservas.append(tr);
@@ -253,7 +250,7 @@ async function cargarReservas() {
     }
 }
 
-/* ================= CERRAR SESIÓN E INICIO ================= */
+// Salir
 
 document.getElementById('btn-salir').addEventListener('click', () => {
     localStorage.removeItem("token");

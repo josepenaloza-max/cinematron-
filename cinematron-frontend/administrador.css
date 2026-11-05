@@ -1,7 +1,3 @@
-/* =====================================
-   PANEL DE ADMINISTRADOR
-   (usa las variables de style.css)
-===================================== */
 
 [hidden] { display: none !important; }
 
@@ -33,8 +29,6 @@
     padding: 26px;
     margin-bottom: 30px;
 }
-
-/* ---------- Formularios ---------- */
 
 .adm-form {
     display: flex;
@@ -100,8 +94,6 @@
 .btn-sec:focus-visible,
 .btn-del:focus-visible { outline: 3px solid #E0245E; outline-offset: 2px; }
 
-/* ---------- Lista de películas ---------- */
-
 .adm-lista {
     list-style: none;
     margin: 0;
@@ -125,7 +117,6 @@
 .adm-lista strong { display: block; font-size: 18px; }
 .adm-lista small { color: var(--ink); }
 
-/* ---------- Tablas ---------- */
 
 .tabla-scroll { overflow-x: auto; }
 
@@ -153,6 +144,26 @@ td.vacio {
     padding: 24px;
 }
 
+.adm-form textarea {
+    width: 100%;
+    padding: 11px;
+    border: 3px solid var(--ink);
+    border-radius: 10px;
+    background: var(--bg);
+    color: var(--ink);
+    font: 400 16px 'Karla', sans-serif;
+    resize: vertical; 
+}
+
+.adm-form textarea:focus {
+    outline: 2px solid var(--pink);
+}
+
+.campo-completo {
+    flex: 1 1 100%;
+}
 @media (max-width: 600px) {
     .adm-sec { padding: 18px; }
 }
+
+

@@ -19,14 +19,14 @@ class Pelicula {
   }
 
   // Crear una nueva película
-  static async create(data) {
-    const { titulo, autor, anio, genero, duracion } = data;
-    const [result] = await db.query(
-      "INSERT INTO pelicula (titulo, autor, anio, genero, duracion) VALUES (?, ?, ?, ?, ?)",
-      [titulo, autor, anio, genero, duracion],
-    );
-    return result.insertId;
-  }
+    static async create(data) {
+        const { titulo, autor, anio, genero, duracion, sinopsis } = data;
+        const [result] = await db.query(
+            'INSERT INTO pelicula (titulo, autor, anio, genero, duracion, sinopsis) VALUES (?, ?, ?, ?, ?, ?)',
+            [titulo, autor, anio, genero, duracion, sinopsis]
+        );
+        return result.insertId;
+    }
 
   // Actualizar una película
   static async delete(id) {
