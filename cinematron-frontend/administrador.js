@@ -239,8 +239,8 @@ async function cargarReservas() {
             const tr = document.createElement('tr');
             tr.append(
                 el('td', r.codigo),
-                el('td', 'Ver detalle'),
-                el('td', 'Asientos'),
+                el('td', r.pelicula),
+                el('td', r.asientos || 'N/A'),
                 el('td', r.telefono)
             );
             tbodyReservas.append(tr);

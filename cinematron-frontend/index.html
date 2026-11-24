@@ -22,7 +22,6 @@
         <b>Cinematron</b>
         <div>
             <a href="#f">Funciones</a>
-            <a href="#s">Salas</a>
             <!-- Enlace al panel de administrador -->
             <a href="login.html" style="background: var(--yellow); padding: 5px 10px; border-radius: 8px; border: 2px solid var(--ink);">Admin</a>
         </div>
@@ -82,7 +81,7 @@
     <!-- ================= VISTA 4: COMPROBANTE ================= -->
     <main id="vista-comprobante" hidden>
         <div class="comprobante box" id="ticket">
-            <h1>🎬 CINEMATRÓN</h1>
+            <h1>CINEMATRÓN</h1>
             <h3>COMPROBANTE DE RESERVA</h3>
             <div class="codigo" id="ticket-codigo">CINE-XXXX</div>
             <p><strong>Cliente:</strong> <span id="ticket-cliente"></span></p>
@@ -93,19 +92,13 @@
             <p><strong>Total:</strong> <span id="ticket-total"></span></p>
             
             <div class="no-print">
-                <button class="btn-primario" onclick="window.print()">🖨️ Imprimir</button>
-                <button class="btn-primario" onclick="descargarPDF()">📥 Descargar PDF</button>
+                <button class="btn-primario" onclick="window.print()"> Imprimir</button>
+                <button class="btn-primario" onclick="descargarPDF()"> Descargar PDF</button>
                 <button class="btn-secundario" onclick="mostrarSeccion('cartelera')">Finalizar</button>
             </div>
         </div>
     </main>
 
-    <!-- ================= VISTA 5: LAS SALAS (Sección del index) ================= -->
-    <section id="s">
-        <h2 class="s" style="margin-top:56px">Las salas</h2>
-        <div class="salas" id="sg"></div>
-    </section>
-</div>
 
 <footer>
     <div class="wrap">
