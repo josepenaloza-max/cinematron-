@@ -26,7 +26,7 @@ app.use("/api/auth", authRoutes);
 // Ruta de prueba
 app.get("/", (req, res) => {
   res.json({
-    mensaje: "🎬 API de Cinematrón funcionando",
+    mensaje: "API de Cinematrón funcionando",
     version: "1.0.0",
     endpoints: {
       peliculas: "/api/peliculas",
